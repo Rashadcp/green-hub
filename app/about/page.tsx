@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 
 export const metadata = {
@@ -50,10 +51,13 @@ export default function About() {
             </div>
 
             <div className="gh-team-banner">
-              <img
+              <Image
                 src="/green-hub-team.jpg"
                 alt="Green Hub founder and in-house technical solar crew on rooftop in Thrissur"
+                fill
+                sizes="(max-width: 900px) 100vw, 1200px"
                 className="gh-team-banner__img"
+                style={{ objectFit: "cover", objectPosition: "center 30%" }}
               />
               <div className="gh-team-banner__overlay">
                 <div className="gh-team-banner__tags">
@@ -95,9 +99,12 @@ export default function About() {
           <div className="container">
             <div className="gh-single-feature">
               <div className="gh-single-feature__media">
-                <img
+                <Image
                   src="/green-hub-expert.jpg"
                   alt="Green Hub engineer overlooking solar panel installation"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 550px"
+                  style={{ objectFit: "cover" }}
                 />
                 <div className="gh-single-feature__media-tag">
                   <b>Green Hub Certified EPC</b>

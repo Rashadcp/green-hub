@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 
 export const metadata = {
@@ -59,9 +60,12 @@ export default function Products() {
           <div className="container">
             <div className="gh-single-feature">
               <div className="gh-single-feature__media">
-                <img
+                <Image
                   src="/green-hub-expert.jpg"
                   alt="Green Hub solar technician inspecting high-efficiency bifacial solar panel array"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 550px"
+                  style={{ objectFit: "cover" }}
                 />
                 <div className="gh-single-feature__media-tag">
                   <b>Tier-1 Mono PERC Bifacial</b>

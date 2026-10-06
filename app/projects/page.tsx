@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 
 interface ProjectItem {
@@ -77,7 +78,13 @@ export default function Projects() {
                   title="Click to view photo"
                 >
                   <div className="gh-minimal-card__media">
-                    <img src={item.image} alt={item.title} loading="lazy" />
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 380px"
+                      style={{ objectFit: "cover" }}
+                    />
                     <span className="gh-minimal-card__zoom-hint">Enlarge</span>
                   </div>
 
@@ -122,7 +129,19 @@ export default function Projects() {
                 &times;
               </button>
               <div className="gh-lightbox__img-wrap">
-                <img src={selectedImage.image} alt={selectedImage.title} />
+                <Image
+                  src={selectedImage.image}
+                  alt={selectedImage.title}
+                  width={1200}
+                  height={800}
+                  priority
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    maxHeight: "65vh",
+                    objectFit: "contain",
+                  }}
+                />
               </div>
               <div className="gh-lightbox__info" style={{ padding: "18px 24px" }}>
                 <h3 style={{ margin: "0 0 4px", fontSize: "17px" }}>

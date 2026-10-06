@@ -1,12 +1,16 @@
 import Link from "next/link";
+import Image from "next/image";
 import PremiumNav from "./PremiumNav";
 
 export function Mark() {
   return (
-    <img
+    <Image
       className="company-logo"
       src="/green-hub-navbar-logo.png"
       alt="Green Hub Solar Energy"
+      width={180}
+      height={56}
+      style={{ height: "auto", width: "auto", maxWidth: "180px" }}
     />
   );
 }

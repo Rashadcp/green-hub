@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
 import PremiumNav from "./components/PremiumNav";
 import BrandGlowBanner from "./components/BrandGlowBanner";
@@ -65,7 +66,7 @@ export default function Home() {
 
   return (
     <>
-      <style jsx global>{`
+      <style>{`
         .hero:after {
           display: none !important;
         }
@@ -234,10 +235,13 @@ export default function Home() {
           </div>
 
           <div className="gh-team-banner">
-            <img
+            <Image
               src="/green-hub-team.jpg"
               alt="Green Hub certified solar technicians"
+              fill
+              sizes="(max-width: 900px) 100vw, 1200px"
               className="gh-team-banner__img"
+              style={{ objectFit: "cover", objectPosition: "center 30%" }}
             />
             <div className="gh-team-banner__overlay">
               <div className="gh-team-banner__tags">
@@ -348,10 +352,13 @@ export default function Home() {
             <article className="gh-evidence-card">
               <div className="gh-evidence-card__img-wrap">
                 <span className="gh-evidence-card__pill">High-Efficiency Array</span>
-                <img
+                <Image
                   src="/green-hub-expert.jpg"
                   alt="Green Hub solar technician inspecting high-efficiency split-cell solar panels"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 600px"
                   className="gh-evidence-card__img"
+                  style={{ objectFit: "cover" }}
                 />
               </div>
               <div className="gh-evidence-card__body">
@@ -390,10 +397,13 @@ export default function Home() {
             <article className="gh-evidence-card">
               <div className="gh-evidence-card__img-wrap">
                 <span className="gh-evidence-card__pill">Zero-Leak Roof Mounting</span>
-                <img
+                <Image
                   src="/green-hub-installation-work.jpg"
                   alt="Green Hub technicians assembling elevated solar structure and mounting solar panels"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 600px"
                   className="gh-evidence-card__img"
+                  style={{ objectFit: "cover" }}
                 />
               </div>
               <div className="gh-evidence-card__body">

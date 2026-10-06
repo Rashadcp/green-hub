@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -47,9 +48,12 @@ export default function PremiumNav() {
       <div className="gh-nav">
         <div className="gh-nav__container">
           <Link href="/" className="gh-brand" onClick={() => setOpen(false)}>
-            <img
+            <Image
               src="/green-hub-navbar-logo.png"
               alt="Green Hub Solar Energy"
+              width={174}
+              height={56}
+              priority
               className="gh-brand__logo"
             />
           </Link>
@@ -91,9 +95,11 @@ export default function PremiumNav() {
         <div className="gh-drawer__overlay" onClick={() => setOpen(false)} />
         <div className="gh-drawer__content">
           <div className="gh-drawer__header">
-            <img
+            <Image
               src="/green-hub-navbar-logo.png"
               alt="Green Hub"
+              width={140}
+              height={44}
               className="gh-drawer__logo"
             />
             <button
