@@ -64,7 +64,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="site-shell">
+    <>
       <style jsx global>{`
         .hero:after {
           display: none !important;
@@ -123,8 +123,9 @@ export default function Home() {
       {/* Redesigned Premium Glass Sticky Navbar */}
       <PremiumNav />
 
-      {/* Hero Section */}
-      <section className="hero" id="top">
+      <main className="site-shell">
+        {/* Hero Section */}
+        <section className="hero" id="top">
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">
@@ -716,5 +717,6 @@ export default function Home() {
       {/* Unified Upgraded Site Footer */}
       <SiteFooter />
     </main>
-  );
+  </>
+);
 }
