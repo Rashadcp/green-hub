@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import PremiumNav from "./components/PremiumNav";
 import BrandGlowBanner from "./components/BrandGlowBanner";
+import SolarGlobe3D from "./components/SolarGlobe3D";
 import { SiteFooter } from "./components/SiteChrome";
 
 const Arrow = () => <span aria-hidden="true">&rarr;</span>;
@@ -31,11 +32,71 @@ const Bolt = () => (
 export default function Home() {
   const [sent, setSent] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const subsidyCardRef = useRef<HTMLDivElement>(null);
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
     setSent(true);
   };
+
+  useEffect(() => {
+    const card = subsidyCardRef.current;
+    if (!card) return;
+
+    // Check if browser natively handles CSS scroll-driven animation
+    const supportsScrollTimeline =
+      typeof CSS !== "undefined" &&
+      typeof CSS.supports === "function" &&
+      CSS.supports("animation-timeline", "view()");
+
+    if (supportsScrollTimeline) return;
+
+    let ticking = false;
+    const updateZoom = () => {
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const vh = window.innerHeight;
+
+      // Scroll progress through viewport: 0 when entering bottom, 1 when leaving top
+      const total = vh + rect.height;
+      const progress = Math.max(0, Math.min(1, (vh - rect.top) / total));
+
+      // Zoom from scale 0.88 to 1.0 between 20% (0.2) and 60% (0.6) progress
+      let scale = 0.88;
+      let opacity = 0.88;
+      if (progress <= 0.2) {
+        scale = 0.88;
+        opacity = 0.88;
+      } else if (progress >= 0.6) {
+        scale = 1.0;
+        opacity = 1.0;
+      } else {
+        const factor = (progress - 0.2) / 0.4;
+        scale = 0.88 + factor * 0.12;
+        opacity = 0.88 + factor * 0.12;
+      }
+
+      card.style.transform = `scale(${scale.toFixed(4)})`;
+      card.style.opacity = `${opacity.toFixed(3)}`;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateZoom);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateZoom();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const targets = Array.from(
@@ -164,6 +225,9 @@ export default function Home() {
       {/* Brand Spotlight Card with Left-to-Right Animated Glow Effect */}
       <BrandGlowBanner companyName="GREEN HUB" />
 
+      {/* Interactive 3D Rotating Solar Globe (Three.js WebGL) */}
+      <SolarGlobe3D />
+
       {/* Intro Stats Section */}
       <section className="section intro" id="about">
         <div className="container">
@@ -211,6 +275,92 @@ export default function Home() {
               <br />
               Let&apos;s build yours in Kerala. <Arrow />
             </aside>
+          </div>
+        </div>
+      </section>
+
+      {/* PM SURYA GHAR 2027 SUBSIDY & 3 PILLARS CAMPAIGN SECTION */}
+      <section className="gh-subsidy-section" id="subsidy">
+        <div className="container">
+          <div className="gh-subsidy-card" ref={subsidyCardRef}>
+            <div className="gh-subsidy-grid">
+              <div>
+                <h2 className="gh-subsidy-title">
+                  ₹78,000 <span className="highlight">വരെ സബ്‌സിഡി.</span>
+                </h2>
+
+                <div className="gh-subsidy-deadline-banner">
+                  <span className="gh-subsidy-deadline-year">2027</span>
+                  <div className="gh-subsidy-deadline-text">
+                    <strong>മാർച്ച് 31 വരെ &bull; സബ്‌സിഡി ലഭിക്കാനുള്ള അവസാന അവസരം</strong>
+                    <span>Avail direct central government rooftop solar subsidy before March 31, 2027.</span>
+                  </div>
+                </div>
+
+                {/* 3 Core Pillars */}
+                <div className="gh-subsidy-pillars">
+                  {/* Pillar 1: High Efficiency Solar Solutions */}
+                  <div className="gh-subsidy-pillar-card">
+                    <div className="gh-subsidy-pillar-icon">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        <path d="M3 19h18M5 15h14" />
+                      </svg>
+                    </div>
+                    <div className="gh-subsidy-pillar-info">
+                      <h4>High Efficiency Solar Solutions</h4>
+                      <p>Tier-1 bifacial panels engineered for maximum generation, high monsoon resistance, and 25-year performance warranty.</p>
+                    </div>
+                  </div>
+
+                  {/* Pillar 2: EV Charging Made Easy */}
+                  <div className="gh-subsidy-pillar-card">
+                    <div className="gh-subsidy-pillar-icon">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M3 22h12M4 9h10M4 5h10M4 2h10a2 2 0 0 1 2 2v18" />
+                        <path d="M16 8h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2" />
+                        <path d="M7 13l2-4h-2l2-4" />
+                      </svg>
+                    </div>
+                    <div className="gh-subsidy-pillar-info">
+                      <h4>EV Charging Made Easy</h4>
+                      <p>Charge your electric vehicle directly from rooftop solar with smart home chargers and zero fuel costs.</p>
+                    </div>
+                  </div>
+
+                  {/* Pillar 3: Sustainable Living */}
+                  <div className="gh-subsidy-pillar-card">
+                    <div className="gh-subsidy-pillar-icon">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <path d="M9 22V12h6v10" />
+                        <path d="M15 9.5c1.5-1 3.5.5 3 2.5-1.5 2-4 1.5-3-2.5z" />
+                      </svg>
+                    </div>
+                    <div className="gh-subsidy-pillar-info">
+                      <h4>Sustainable Living</h4>
+                      <p>Zero electric bills, reduced carbon footprint, and complete clean energy self-reliance for your family.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Right Column: Visual Poster Card */}
+              <div className="gh-subsidy-visual-wrap">
+                <div className="gh-subsidy-poster-frame">
+                  <Image
+                    src="/pm-surya-ghar-subsidy.jpg"
+                    alt="Green Hub Solar PM Surya Ghar 2027 ₹78,000 Subsidy Campaign Poster"
+                    width={520}
+                    height={650}
+                    className="gh-subsidy-poster-img"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -351,10 +501,10 @@ export default function Home() {
             {/* Card 1: Expert Inspection */}
             <article className="gh-evidence-card">
               <div className="gh-evidence-card__img-wrap">
-                <span className="gh-evidence-card__pill">High-Efficiency Array</span>
+                <span className="gh-evidence-card__pill">High-Efficiency Panels</span>
                 <Image
                   src="/green-hub-expert.jpg"
-                  alt="Green Hub solar technician inspecting high-efficiency split-cell solar panels"
+                  alt="Green Hub solar technician inspecting high-efficiency solar panels"
                   fill
                   sizes="(max-width: 900px) 100vw, 600px"
                   className="gh-evidence-card__img"
@@ -362,29 +512,29 @@ export default function Home() {
                 />
               </div>
               <div className="gh-evidence-card__body">
-                <small>01 / PRECISION HARDWARE</small>
-                <h4>Tier-1 Mono PERC Bifacial Modules</h4>
+                <small>01 / SOLAR HARDWARE</small>
+                <h4>High-Efficiency Solar Panels</h4>
                 <p>
-                  Optimized for Kerala&apos;s climate, capturing both direct sun
-                  and reflected rooftop light for up to 25% extra generation.
+                  Built for Kerala weather. Generates electricity from both direct
+                  sunlight and reflected light for up to 25% more power.
                 </p>
                 <div className="gh-evidence-card__highlights">
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>Hot-dip galvanized elevated structure (anti-rust)</span>
+                    <span>Rust-free elevated frame (keeps your roof usable)</span>
                   </div>
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>150 km/h wind-load rated framing</span>
+                    <span>Tested to handle strong winds and heavy monsoon rains</span>
                   </div>
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>25-year linear power warranty guarantee</span>
+                    <span>25-year long-term power generation warranty</span>
                   </div>
                 </div>
                 <div className="gh-evidence-card__footer">
                   <Link href="/products" className="gh-evidence-card__link">
-                    Explore panel specs &rarr;
+                    View Panel Details &rarr;
                   </Link>
                   <a href="tel:7034010111" className="gh-evidence-card__phone">
                     Call: 70340 10111
@@ -396,7 +546,7 @@ export default function Home() {
             {/* Card 2: Active Rooftop Installation Work */}
             <article className="gh-evidence-card">
               <div className="gh-evidence-card__img-wrap">
-                <span className="gh-evidence-card__pill">Zero-Leak Roof Mounting</span>
+                <span className="gh-evidence-card__pill">100% Leak-Proof Mounting</span>
                 <Image
                   src="/green-hub-installation-work.jpg"
                   alt="Green Hub technicians assembling elevated solar structure and mounting solar panels"
@@ -407,30 +557,29 @@ export default function Home() {
                 />
               </div>
               <div className="gh-evidence-card__body">
-                <small>02 / FIELD CRAFTSMANSHIP</small>
-                <h4>Meticulous Rooftop Assembly</h4>
+                <small>02 / EXPERT INSTALLATION</small>
+                <h4>Careful &amp; Leak-Proof Fitting</h4>
                 <p>
-                  Our technicians anchor elevated structural framing with
-                  marine-grade fasteners, protecting your roof membrane with zero
-                  leakage guaranteed.
+                  Installed directly by our own trained team with strong fittings —
+                  100% leak-proof and completely safe for your terrace.
                 </p>
                 <div className="gh-evidence-card__highlights">
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>Heavy-duty UV-resistant DC cable trunking</span>
+                    <span>Neat, heat-resistant safety wiring and pipes</span>
                   </div>
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>Dedicated copper chemical earthing pits</span>
+                    <span>Proper copper earthing for full home safety</span>
                   </div>
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>Type-II Lightning and Surge Arrestors installed</span>
+                    <span>Built-in protection against lightning &amp; voltage surges</span>
                   </div>
                 </div>
                 <div className="gh-evidence-card__footer">
                   <Link href="/projects" className="gh-evidence-card__link">
-                    Explore verified projects &rarr;
+                    See Completed Projects &rarr;
                   </Link>
                   <a
                     href="https://wa.me/917034010111"
@@ -645,6 +794,16 @@ export default function Home() {
                 rel="noopener noreferrer"
               >
                 WhatsApp: +91 70340 10111
+              </a>
+              <a
+                href="mailto:greenhubsolar@gmail.com"
+                style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}
+              >
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+                <span>Email: greenhubsolar@gmail.com</span>
               </a>
               <a
                 href="https://instagram.com/greenhub_solarenergy"

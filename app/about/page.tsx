@@ -100,11 +100,12 @@ export default function About() {
             <div className="gh-single-feature">
               <div className="gh-single-feature__media">
                 <Image
-                  src="/green-hub-expert.jpg"
-                  alt="Green Hub engineer overlooking solar panel installation"
+                  src="/green-hub-kerala-workmanship.jpg"
+                  alt="Green Hub rooftop solar panel installation on traditional Kerala tiled roof overlooking scenic backwaters"
                   fill
+                  priority
                   sizes="(max-width: 900px) 100vw, 550px"
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover", objectPosition: "center" }}
                 />
                 <div className="gh-single-feature__media-tag">
                   <b>Green Hub Certified EPC</b>

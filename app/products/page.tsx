@@ -21,8 +21,8 @@ const products = [
   ],
   [
     "03",
-    "Hybrid Solar with Storage",
-    "Combines solar generation with lithium or tubular battery backup for uninterrupted power during grid outages.",
+    "Solar Carport & EV Charging",
+    "Transform parking driveways into power stations with architectural solar canopies and integrated high-speed EV chargers.",
   ],
   [
     "04",
@@ -61,50 +61,51 @@ export default function Products() {
             <div className="gh-single-feature">
               <div className="gh-single-feature__media">
                 <Image
-                  src="/green-hub-expert.jpg"
-                  alt="Green Hub solar technician inspecting high-efficiency bifacial solar panel array"
+                  src="/green-hub-solar-ev-carport.jpg"
+                  alt="Green Hub architectural solar carport with integrated EV charging station"
                   fill
+                  priority
                   sizes="(max-width: 900px) 100vw, 550px"
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover", objectPosition: "center" }}
                 />
                 <div className="gh-single-feature__media-tag">
-                  <b>Tier-1 Mono PERC Bifacial</b>
-                  <small>550W+ High Output</small>
+                  <b>Solar Carport &amp; EV Charging</b>
+                  <small>100% Green Mobility</small>
                 </div>
               </div>
 
               <div className="gh-single-feature__content">
                 <p className="eyebrow">
-                  <i /> Hardware Standard
+                  <i /> Modern Solar Architecture
                 </p>
                 <h3>
-                  Tested for tropical heat &amp; <em>monsoon rains.</em>
+                  Power your home &amp; charge your EV with <em>clean sunlight.</em>
                 </h3>
                 <p>
-                  Every panel installed by Green Hub features anti-reflective
-                  tempered glass, split-cell architecture to minimize shading
-                  losses, and corrosion-resistant anodized aluminum frames.
+                  Transform driveways and parking bays into clean energy generation
+                  powerhouses. Engineered with cyclone-proof galvanized steel,
+                  Tier-1 bifacial panels, and smart EV charging stations.
                 </p>
                 <div className="gh-evidence-card__highlights">
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>Dual-glass bifacial generation (up to 25% rear boost)</span>
+                    <span>High-power bifacial solar canopy providing shade and electricity</span>
                   </div>
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>IP68 waterproof junction boxes &amp; MC4 connectors</span>
+                    <span>Smart EV fast charger integration with overload and lightning safety</span>
                   </div>
                   <div className="gh-evidence-card__item">
                     <span className="gh-evidence-card__check">✓</span>
-                    <span>12-year product warranty &bull; 25-year performance warranty</span>
+                    <span>Weatherproof industrial cabling and seamless KSEB net-metering</span>
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "14px", marginTop: "24px", flexWrap: "wrap" }}>
                   <Link href="/contact" className="button lime">
-                    Request System Quote &rarr;
+                    Request Solar Solution Quote &rarr;
                   </Link>
                   <a
-                    href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20would%20like%20to%20enquire%20about%20your%20solar%20products."
+                    href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20would%20like%20to%20enquire%20about%20your%20solar%20solutions."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-link"
