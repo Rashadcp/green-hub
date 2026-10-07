@@ -3,9 +3,26 @@ import Image from "next/image";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 
 export const metadata = {
-  title: "About Us — Green Hub Solar Energy",
+  title: "About Our Solar Engineering Team — Green Hub Thrissur",
   description:
-    "Meet Green Hub's certified in-house solar engineering crew in Mattom, Thrissur. Dedicated rooftop solar installations with no subcontractors.",
+    "Meet Green Hub's certified in-house solar engineering crew in Mattom, Thrissur. Direct rooftop solar EPC, zero subcontractors, and dedicated KSEB liaison squad.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Our Solar Engineering Team — Green Hub Thrissur",
+    description:
+      "Certified in-house solar technicians and engineers in Mattom, Thrissur, Kerala. 1,200+ rooftop installations completed.",
+    url: "https://greenhubsolar.in/about",
+    images: [
+      {
+        url: "/green-hub-team.jpg",
+        width: 1000,
+        height: 667,
+        alt: "Green Hub In-House Solar Engineering Crew",
+      },
+    ],
+  },
 };
 
 export default function About() {

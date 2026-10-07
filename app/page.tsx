@@ -3,8 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import PremiumNav from "./components/PremiumNav";
+import dynamic from "next/dynamic";
 import BrandGlowBanner from "./components/BrandGlowBanner";
-import SolarGlobe3D from "./components/SolarGlobe3D";
+const SolarGlobe3D = dynamic(() => import("./components/SolarGlobe3D"), {
+  ssr: false,
+});
 import { SiteFooter } from "./components/SiteChrome";
 
 const Arrow = () => <span aria-hidden="true">&rarr;</span>;
@@ -17,6 +20,7 @@ const Sun = () => (
     </g>
   </svg>
 );
+
 const Bolt = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path
@@ -28,6 +32,13 @@ const Bolt = () => (
     />
   </svg>
 );
+
+const WhatsAppIcon = () => (
+  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.07 7.42C8.91 7.42 8.65 7.48 8.42 7.73C8.19 7.98 7.56 8.57 7.56 9.78C7.56 10.99 8.44 12.16 8.57 12.33C8.69 12.5 10.29 14.97 12.75 16.03C13.33 16.28 13.79 16.43 14.14 16.54C14.73 16.73 15.26 16.7 15.69 16.64C16.17 16.57 17.15 16.05 17.35 15.48C17.56 14.91 17.56 14.42 17.5 14.32C17.43 14.22 17.27 14.16 17.02 14.04C16.78 13.91 15.58 13.32 15.35 13.24C15.13 13.16 14.96 13.12 14.8 13.36C14.64 13.61 14.18 14.16 14.04 14.32C13.9 14.49 13.76 14.51 13.52 14.39C13.27 14.26 12.23 13.92 11 12.83C10.04 11.97 9.39 10.92 9.27 10.71C9.15 10.51 9.26 10.39 9.38 10.27C9.49 10.16 9.63 9.98 9.75 9.83C9.88 9.69 9.92 9.58 10 9.42C10.08 9.25 10.04 9.11 9.98 8.98C9.92 8.86 9.45 7.7 9.26 7.23C9.07 6.78 8.88 6.84 8.74 6.83L8.3 6.83C8.14 6.83 7.88 6.89 7.65 7.14" />
+  </svg>
+);
+
 
 export default function Home() {
   const [sent, setSent] = useState(false);
@@ -101,7 +112,7 @@ export default function Home() {
   useEffect(() => {
     const targets = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".site-shell .section, .site-shell .solution, .site-shell .quote-card, .gh-team-banner, .gh-evidence-card, .gh-single-feature, .gh-min-support-card"
+        ".site-shell .section, .site-shell .solution, .site-shell .quote-card, .gh-team-banner, .gh-evidence-card, .gh-single-feature, .gh-min-support-card, .gh-product-card"
       )
     );
     targets.forEach((target, index) => {
@@ -356,7 +367,6 @@ export default function Home() {
                     width={520}
                     height={650}
                     className="gh-subsidy-poster-img"
-                    priority
                   />
                 </div>
               </div>
@@ -475,6 +485,294 @@ export default function Home() {
                 ))}
               </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      {/* MINIMAL HORIZONTAL PRODUCT ROW: 6 Clean Energy Systems */}
+      <section className="gh-products-section" id="products">
+        <div className="gh-products-container">
+          <div className="gh-products-header">
+            <div className="gh-products-header__main">
+              <p className="eyebrow">
+                <i /> Certified Clean Energy Systems &bull; Kerala
+              </p>
+              <h2>
+                Power, Heat, Mobility &amp; <span>Storage.</span>
+              </h2>
+            </div>
+            <div className="gh-products-header__side">
+              <p className="gh-products-header__sub">
+                End-to-end solar &amp; clean energy hardware engineered for Kerala climate, villas, and commercial facilities.
+              </p>
+              <Link href="/products" className="gh-products-catalog-link">
+                <span>View Full Tech Specs &amp; Catalog</span>
+                <Arrow />
+              </Link>
+            </div>
+          </div>
+
+          <div className="gh-min-products-row">
+            {/* 01: SOLAR WATER HEATER */}
+            <article className="gh-min-card">
+              <div className="gh-min-card__media">
+                <span className="gh-min-card__idx">01</span>
+                <Image
+                  src="/solar-water-heater.jpg"
+                  alt="Green Hub Solar Water Heater"
+                  fill
+                  sizes="(max-width: 1024px) 220px, 16vw"
+                  className="gh-min-card__img"
+                />
+              </div>
+              <div className="gh-min-card__info">
+                <span className="gh-min-card__tag">Thermal Hot Water</span>
+                <h3 className="gh-min-card__title">Solar Water Heater</h3>
+                <p className="gh-min-card__caption">
+                  Zero-bill thermal hot water 24/7 with triple-layer vacuum tubes.
+                </p>
+                <a
+                  href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20would%20like%20to%20enquire%20about%20Solar%20Water%20Heater."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gh-min-card__action"
+                >
+                  <WhatsAppIcon />
+                  <span>Enquire</span>
+                </a>
+              </div>
+            </article>
+
+            {/* 02: STREET LIGHTS */}
+            <article className="gh-min-card">
+              <div className="gh-min-card__media">
+                <span className="gh-min-card__idx">02</span>
+                <Image
+                  src="/solar-street-lights.jpg"
+                  alt="All-in-one solar street light pole"
+                  fill
+                  sizes="(max-width: 1024px) 220px, 16vw"
+                  className="gh-min-card__img"
+                />
+              </div>
+              <div className="gh-min-card__info">
+                <span className="gh-min-card__tag">Autonomous Outdoor</span>
+                <h3 className="gh-min-card__title">Street Lights</h3>
+                <p className="gh-min-card__caption">
+                  Dusk-to-dawn sensor LED lighting with LiFePO4 battery &amp; zero wiring.
+                </p>
+                <a
+                  href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20would%20like%20to%20enquire%20about%20Solar%20Street%20Lights."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gh-min-card__action"
+                >
+                  <WhatsAppIcon />
+                  <span>Enquire</span>
+                </a>
+              </div>
+            </article>
+
+            {/* 03: EV CHARGER */}
+            <article className="gh-min-card">
+              <div className="gh-min-card__media">
+                <span className="gh-min-card__idx">03</span>
+                <Image
+                  src="/solar-ev-charger.jpg"
+                  alt="Smart residential & commercial solar EV charger"
+                  fill
+                  sizes="(max-width: 1024px) 220px, 16vw"
+                  className="gh-min-card__img"
+                />
+              </div>
+              <div className="gh-min-card__info">
+                <span className="gh-min-card__tag">Clean Mobility</span>
+                <h3 className="gh-min-card__title">EV Charger</h3>
+                <p className="gh-min-card__caption">
+                  Smart fast-charging stations powered directly from rooftop solar.
+                </p>
+                <a
+                  href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20would%20like%20to%20enquire%20about%20Solar%20EV%20Charger."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gh-min-card__action"
+                >
+                  <WhatsAppIcon />
+                  <span>Enquire</span>
+                </a>
+              </div>
+            </article>
+
+            {/* 04: BATTERY & INVERTER */}
+            <article className="gh-min-card">
+              <div className="gh-min-card__media">
+                <span className="gh-min-card__idx">04</span>
+                <Image
+                  src="/solar-battery-inverter.jpg"
+                  alt="Solar battery and hybrid inverter energy storage"
+                  fill
+                  sizes="(max-width: 1024px) 220px, 16vw"
+                  className="gh-min-card__img"
+                />
+              </div>
+              <div className="gh-min-card__info">
+                <span className="gh-min-card__tag">UPS Storage</span>
+                <h3 className="gh-min-card__title">Battery &amp; Inverter</h3>
+                <p className="gh-min-card__caption">
+                  Millisecond blackout switchover with smart lithium storage.
+                </p>
+                <a
+                  href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20would%20like%20to%20enquire%20about%20Battery%20and%20Inverter%20backup."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gh-min-card__action"
+                >
+                  <WhatsAppIcon />
+                  <span>Enquire</span>
+                </a>
+              </div>
+            </article>
+
+            {/* 05: MICRO INVERTER */}
+            <article className="gh-min-card">
+              <div className="gh-min-card__media">
+                <span className="gh-min-card__idx">05</span>
+                <Image
+                  src="/solar-micro-inverter.jpg"
+                  alt="High-efficiency solar micro inverter"
+                  fill
+                  sizes="(max-width: 1024px) 220px, 16vw"
+                  className="gh-min-card__img"
+                />
+              </div>
+              <div className="gh-min-card__info">
+                <span className="gh-min-card__tag">Module MPPT</span>
+                <h3 className="gh-min-card__title">Micro Inverter</h3>
+                <p className="gh-min-card__caption">
+                  Panel-level optimization, rapid shutdown &amp; 25-year reliability.
+                </p>
+                <a
+                  href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20would%20like%20to%20enquire%20about%20Micro%20Inverters."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gh-min-card__action"
+                >
+                  <WhatsAppIcon />
+                  <span>Enquire</span>
+                </a>
+              </div>
+            </article>
+
+            {/* 06: STRING INVERTER */}
+            <article className="gh-min-card">
+              <div className="gh-min-card__media">
+                <span className="gh-min-card__idx">06</span>
+                <Image
+                  src="/solar-string-inverter.jpg"
+                  alt="Solar string inverters single phase three phase hybrid"
+                  fill
+                  sizes="(max-width: 1024px) 220px, 16vw"
+                  className="gh-min-card__img"
+                />
+              </div>
+              <div className="gh-min-card__info">
+                <span className="gh-min-card__tag">All Types Available</span>
+                <h3 className="gh-min-card__title">String Inverter</h3>
+                <p className="gh-min-card__caption">
+                  Single-phase, 3-phase on-grid &amp; hybrid models with 98.6% efficiency.
+                </p>
+                <a
+                  href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20would%20like%20to%20enquire%20about%20String%20Inverters."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gh-min-card__action"
+                >
+                  <WhatsAppIcon />
+                  <span>Enquire</span>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          {/* SLIM HORIZONTAL MICRO INVERTER BRANDS STRIP */}
+          <div className="gh-min-brands-bar">
+            <div className="gh-min-brands-meta">
+              <span className="gh-min-brands-label">
+                <i className="gh-live-dot" />
+                Micro Inverter Brands Available:
+              </span>
+              <span className="gh-min-brands-tag">Official Kerala Supply</span>
+            </div>
+
+            <div className="gh-min-brands-list">
+              <a
+                href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20am%20enquiring%20about%20Enphase%20Micro%20Inverters."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gh-min-brand-pill"
+                title="Enphase Micro Inverters — USA Pioneer"
+              >
+                <Image
+                  src="/brands/enphase.png"
+                  alt="Enphase logo"
+                  width={90}
+                  height={22}
+                />
+                <span>ENPHASE</span>
+                <small>&bull; Enquire</small>
+              </a>
+
+              <a
+                href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20am%20enquiring%20about%20Deye%20Micro%20Inverters."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gh-min-brand-pill"
+                title="Deye Micro Inverters — Dual & Quad MPPT"
+              >
+                <Image
+                  src="/brands/deye.png"
+                  alt="Deye logo"
+                  width={80}
+                  height={22}
+                />
+                <span>DEYE</span>
+                <small>&bull; Enquire</small>
+              </a>
+
+              <a
+                href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20am%20enquiring%20about%20TSUN%20Micro%20Inverters."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gh-min-brand-pill"
+                title="T SUN Micro Inverters — Multi-Channel Safety"
+              >
+                <Image
+                  src="/brands/tsun.png"
+                  alt="T SUN logo"
+                  width={85}
+                  height={22}
+                />
+                <span>T SUN</span>
+                <small>&bull; Enquire</small>
+              </a>
+
+              <a
+                href="https://wa.me/917034010111?text=Hello%20Green%20Hub,%20I%20am%20enquiring%20about%20Hoymiles%20Micro%20Inverters."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gh-min-brand-pill"
+                title="Hoymiles Micro Inverters — World #1 HMS"
+              >
+                <Image
+                  src="/brands/hoymiles.png"
+                  alt="Hoymiles logo"
+                  width={75}
+                  height={22}
+                />
+                <span>HOYMILES</span>
+                <small>&bull; Enquire</small>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -867,8 +1165,13 @@ export default function Home() {
                     </option>
                     <option>Residential Rooftop Solar (Home/Villa)</option>
                     <option>Commercial / Industrial Solar</option>
-                    <option>Hybrid Solar with Battery Backup</option>
-                    <option>Agricultural / Pump Solar</option>
+                    <option>Solar Water Heater System</option>
+                    <option>Solar Street Lighting Solution</option>
+                    <option>Solar EV Fast Charger Station</option>
+                    <option>Battery &amp; Inverter Hybrid Storage</option>
+                    <option>Micro Inverter System (Enphase / Deye / TSUN / Hoymiles)</option>
+                    <option>String Inverter - All Types (Single / Three Phase / Hybrid)</option>
+                    <option>Agricultural / Solar Pump System</option>
                   </select>
                 </label>
                 <button className="button lime" type="submit">

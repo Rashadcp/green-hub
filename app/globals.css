@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Sora:wght@400;500;600;700&display=swap');
+/* Fonts loaded via preconnected link tags in layout.tsx for non-blocking rendering */
 .expand-list{margin-top:74px;border-top:1px solid var(--line)}.expand-item{position:relative;width:100%;min-height:133px;display:grid;grid-template-columns:90px 65px 1fr 30px;gap:20px;align-items:center;padding:0;border:0;border-bottom:1px solid var(--line);color:var(--ink);background:transparent;text-align:left;overflow:hidden;transition:background .35s ease,padding .35s ease,min-height .35s ease}.expand-item:hover,.expand-item.is-active{min-height:156px;padding-left:16px;background:rgba(255,255,255,.55)}.expand-item>small{align-self:start;padding-top:26px;color:var(--slate);font:11px 'DM Mono'}.expand-icon{width:45px;height:45px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--lime2);font:19px 'Sora';transition:transform .35s ease,background .35s ease,color .35s ease}.is-active .expand-icon{color:var(--ink);background:var(--lime);border-color:var(--lime);transform:rotate(180deg)}.expand-copy{display:flex;flex-direction:column;gap:8px;max-width:620px}.expand-copy b{font:600 17px 'Sora';letter-spacing:-.03em}.expand-copy em{max-height:0;overflow:hidden;color:var(--slate);font-size:14px;font-style:normal;line-height:1.55;opacity:0;transform:translateY(-5px);transition:max-height .35s ease,opacity .25s ease,transform .35s ease}.is-active .expand-copy em{max-height:48px;opacity:1;transform:none}.expand-arrow{justify-self:end;color:var(--slate);font-size:18px;transition:color .3s,transform .3s}.is-active .expand-arrow{color:var(--ink);transform:translate(3px,-3px)}.expand-meter{position:absolute;left:0;bottom:0;width:100%;height:3px;background:transparent}.expand-meter i{display:block;width:0;height:100%;background:var(--lime2);transition:width .6s cubic-bezier(.2,.8,.2,1)}.is-active .expand-meter i{width:100%}
 @media(max-width:600px){.expand-list{margin-top:50px}.expand-item{grid-template-columns:45px 1fr 20px;gap:15px;min-height:112px}.expand-item:hover,.expand-item.is-active{min-height:145px;padding-left:8px}.expand-item>small{grid-column:1;grid-row:1;padding-top:0;align-self:center}.expand-icon{grid-column:1;grid-row:2;width:38px;height:38px}.expand-copy{grid-column:2;grid-row:1/span 2}.expand-arrow{grid-column:3;grid-row:1}.expand-copy b{font-size:16px}.expand-copy em{font-size:13px}.is-active .expand-copy em{max-height:62px}}
 .company-logo{display:block;width:148px;height:56px;object-fit:contain;object-position:left center}.logo-brand{letter-spacing:0}.site-shell .header .brand{width:148px;height:56px;background:url('/green-hub-logo.png') left center/contain no-repeat;font-size:0}.site-shell .header .brand-mark{display:none}.site-shell .header{color:var(--paper)}.site-shell .header .header-cta{border-color:rgba(251,250,246,.45)}footer .company-logo{width:180px;height:68px}@media(max-width:900px){.site-shell .nav{color:var(--ink)}}@media(max-width:600px){.company-logo,.site-shell .header .brand{width:112px;height:44px}footer .company-logo{width:150px;height:58px}}
@@ -2626,19 +2626,766 @@ body.home-nav-scrolled .site-shell .header{top:12px;right:16px;left:16px;padding
   .gh-subsidy-deadline-year {
     font-size: 24px;
   }
-  .gh-subsidy-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
   .gh-subsidy-phone-pill,
   .gh-subsidy-email-pill {
     justify-content: center;
   }
 }
 
+/* =========================================================
+   MINIMAL HORIZONTAL PRODUCTS ROW (Single Horizontal Finish)
+   6 Hardware Systems: Water Heater, Street Lights, EV Charger,
+   Battery & Inverter, Micro Inverter, String Inverter
+========================================================= */
+.gh-products-section {
+  padding: 85px 0 95px;
+  background: var(--paper);
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
 
+.gh-products-container {
+  width: min(1360px, calc(100% - 40px));
+  margin: 0 auto;
+}
 
+.gh-products-header {
+  margin-bottom: 34px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
 
+.gh-products-header__main h2 {
+  margin: 12px 0 0;
+  font-size: clamp(30px, 3.8vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.06em;
+}
 
+.gh-products-header__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  text-align: right;
+}
 
+.gh-products-header__sub {
+  margin: 0;
+  max-width: 440px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+.gh-products-catalog-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Sora', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 5px 0;
+  border-bottom: 1.5px solid var(--lime2);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.gh-products-catalog-link:hover {
+  color: #2b6100;
+  border-color: #2b6100;
+  transform: translateX(3px);
+}
+
+/* Horizontal 6-item finish: desktop 6-col, responsive swipe on mobile */
+.gh-min-products-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.gh-min-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(17, 20, 41, 0.09);
+  border-radius: 16px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 28px rgba(17, 20, 41, 0.04);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.25s ease;
+}
+
+.gh-min-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(167, 223, 33, 0.65);
+  box-shadow: 0 20px 42px rgba(17, 20, 41, 0.11);
+}
+
+.gh-min-card__media {
+  position: relative;
+  width: 100%;
+  height: 138px;
+  border-radius: 11px;
+  overflow: hidden;
+  background: #0f1226;
+}
+
+.gh-min-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gh-min-card:hover .gh-min-card__img {
+  transform: scale(1.08);
+}
+
+.gh-min-card__idx {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgba(17, 20, 41, 0.78);
+  color: var(--lime);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+.gh-min-card__info {
+  padding: 11px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gh-min-card__tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.09em;
+  color: var(--slate);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  display: block;
+}
+
+.gh-min-card__title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.025em;
+  margin: 0 0 5px;
+  line-height: 1.25;
+}
+
+.gh-min-card__caption {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--slate);
+  margin: 0 0 12px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gh-min-card__action {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: #25d366;
+  color: #ffffff;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.22);
+}
+
+.gh-min-card__action:hover {
+  background: #20ba5a;
+  transform: translateY(-1.5px);
+  box-shadow: 0 5px 14px rgba(37, 211, 102, 0.32);
+}
+
+/* Slim Horizontal Micro Inverter Brands Strip */
+.gh-min-brands-bar {
+  margin-top: 28px;
+  background: #ffffff;
+  border: 1px solid rgba(17, 20, 41, 0.09);
+  border-radius: 16px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 6px 20px rgba(17, 20, 41, 0.03);
+}
+
+.gh-min-brands-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.gh-min-brands-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.gh-min-brands-tag {
+  font-size: 11px;
+  color: var(--slate);
+  background: rgba(17, 20, 41, 0.04);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.gh-min-brands-list {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.gh-min-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: #fbfaf6;
+  border: 1px solid rgba(17, 20, 41, 0.08);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.gh-min-brand-pill:hover {
+  border-color: #25d366;
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.16);
+}
+
+.gh-min-brand-pill img {
+  max-height: 22px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.gh-min-brand-pill span {
+  font-family: 'Sora', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.gh-min-brand-pill small {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  color: #25d366;
+  font-weight: 600;
+}
+
+/* Responsive Handling */
+@media (max-width: 1180px) {
+  .gh-min-products-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .gh-min-card__media {
+    height: 150px;
+  }
+}
+
+@media (max-width: 900px) {
+  .gh-products-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .gh-products-header__side {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .gh-min-brands-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+  }
+  .gh-min-brands-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .gh-min-brand-pill {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 680px) {
+  .gh-products-section {
+    padding: 60px 0 70px;
+  }
+  /* Fluid touch horizontal swipe deck without next buttons */
+  .gh-min-products-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 14px;
+    scrollbar-width: none;
+    margin: 0 -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .gh-min-products-row::-webkit-scrollbar {
+    display: none;
+  }
+  .gh-min-card {
+    flex: 0 0 205px;
+    scroll-snap-align: start;
+  }
+  .gh-min-card__media {
+    height: 130px;
+  }
+  .gh-min-brands-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Retaining legacy .gh-product-card styles for /products catalog page */
+.gh-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.gh-product-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 40px rgba(17, 20, 41, 0.06);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+}
+
+.gh-product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 60px rgba(17, 20, 41, 0.14);
+  border-color: rgba(167, 223, 33, 0.5);
+}
+
+.gh-product-card__img-wrap {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: #111429;
+}
+
+.gh-product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gh-product-card:hover .gh-product-card__img {
+  transform: scale(1.07);
+}
+
+.gh-product-card__body {
+  padding: 24px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gh-product-card__num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--slate);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.gh-product-card__title {
+  font-family: 'Sora', sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.gh-product-card__desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--slate);
+  margin: 0 0 18px;
+}
+
+.gh-product-card__specs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+  margin-bottom: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.gh-product-card__spec {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.gh-product-card__check {
+  color: var(--lime2);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: -1px;
+}
+
+.gh-product-card__footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(17, 20, 41, 0.08);
+}
+
+.gh-product-card__whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #25d366;
+  color: #ffffff;
+  font-family: 'Sora', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+}
+
+.gh-product-card__whatsapp-btn:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+}
+
+.gh-product-card__quote-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+  font-family: 'Sora', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 4px;
+  transition: color 0.2s ease;
+}
+
+.gh-product-card__quote-link:hover {
+  color: var(--lime2);
+}
+
+@media (max-width: 1200px) {
+  .gh-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .gh-product-card__img-wrap {
+    height: 260px;
+  }
+}
+
+@media (max-width: 640px) {
+  .gh-products-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .gh-product-card__img-wrap {
+    height: 220px;
+  }
+}
+
+/* =========================================================
+   MICRO INVERTER BRAND SHOWCASE (Enphase, Deye, TSUN, Hoymiles)
+========================================================= */
+.gh-product-card__brand-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  background: rgba(17, 20, 41, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.gh-product-card__brand-chips-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--slate);
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.gh-product-card__brand-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(17, 20, 41, 0.1);
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.gh-product-card__brand-chip img {
+  object-fit: contain;
+}
+
+.gh-micro-brands-banner {
+  margin-top: 56px;
+  background: linear-gradient(145deg, #111429 0%, #1a1e3b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 44px 38px;
+  box-shadow: 0 24px 60px rgba(17, 20, 41, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.gh-micro-brands-banner::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(200, 255, 74, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.gh-micro-brands-header {
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
+}
+
+.gh-micro-brands-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(200, 255, 74, 0.15);
+  color: var(--lime);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  border: 1px solid rgba(200, 255, 74, 0.3);
+}
+
+.gh-micro-brands-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.04em;
+  margin: 0 0 10px;
+  line-height: 1.15;
+}
+
+.gh-micro-brands-title span {
+  color: var(--lime);
+}
+
+.gh-micro-brands-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(251, 250, 246, 0.72);
+  max-width: 680px;
+  margin: 0;
+}
+
+.gh-micro-brands-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.gh-micro-brand-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+}
+
+.gh-micro-brand-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  border-color: var(--lime);
+}
+
+.gh-micro-brand-logo-wrap {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: #fbfaf6;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 20, 41, 0.06);
+}
+
+.gh-micro-brand-logo-img {
+  max-width: 100%;
+  max-height: 52px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.gh-micro-brand-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.gh-micro-brand-info {
+  font-size: 12px;
+  color: var(--slate);
+  line-height: 1.45;
+  margin: 0 0 14px;
+  flex: 1;
+}
+
+.gh-micro-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(167, 223, 33, 0.16);
+  color: #2b6100;
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+.gh-micro-brand-action {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #25d366;
+  color: #ffffff;
+  font-family: 'Sora', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.gh-micro-brand-action:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1100px) {
+  .gh-micro-brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .gh-micro-brands-banner {
+    padding: 30px 20px;
+    border-radius: 18px;
+    margin-top: 40px;
+  }
+  .gh-micro-brands-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
 

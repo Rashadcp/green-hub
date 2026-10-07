@@ -39,8 +39,9 @@ export default function SolarGlobe3D() {
     return () => observer.disconnect();
   }, []);
 
-  // Three.js 3D Sphere Scene
+  // Three.js 3D Sphere Scene (Lazy initialized on scroll reveal)
   useEffect(() => {
+    if (!isRevealed) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -397,7 +398,7 @@ export default function SolarGlobe3D() {
         domElement.parentNode.removeChild(domElement);
       }
     };
-  }, []);
+  }, [isRevealed]);
 
   return (
     <section
